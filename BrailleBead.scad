@@ -11,12 +11,12 @@
  */
 use <./LiberationSans.ttf>
 
-cube_size=10;
-hole_size=5;
-fillet=0.5;
+cube_size=25;
+hole_size=cube_size/2;
+fillet=cube_size/20;
 font_size=cube_size*4/5;
-font_roundness=0.3;
-font_height=0.6;
+font_roundness=cube_size/20;
+font_height=cube_size/10;
 $fn = 20;
 
 include <./BrailleGlyphs.scad>
