@@ -23,10 +23,10 @@ include <./BrailleGlyphs.scad>
 
 module basic_shape(){
     minkowski(){
-		difference(){
-			cube(size=cube_size-2*fillet,center=true);
-			cylinder(d=hole_size+2*fillet,h=cube_size,center=true);}
-		sphere(r=fillet);}}
+        difference(){
+            cube(size=cube_size-2*fillet,center=true);
+            cylinder(d=hole_size+2*fillet,h=cube_size,center=true);}
+        sphere(r=fillet);}}
 module standard_text(symbol){
     minkowski(){
         linear_extrude(height=font_height-font_roundness)
@@ -34,14 +34,25 @@ module standard_text(symbol){
                 size=font_size,valign="center",halign="center",center=true);
             sphere(r=font_roundness);}
 }
-module braille_bead(num){
-	basic_shape();
+module braille_bead(number){
+    basic_shape();
     translate([0,-cube_size/2,0])
         rotate([90,0,0])
-            standard_text(str(num));
+            standard_text(str(number));
     translate([0,cube_size/2,0])
         rotate([90,0,180])
-            braille_number(num);
+            braille_number(number);
 }
-
-braille_bead(6);
+module braille_letter_bead(number){
+    basic_shape();
+    translate([0,-cube_size/2,0])
+        rotate([90,0,0])
+            standard_text(chr(number+65));
+    translate([0,cube_size/2,0])
+        rotate([90,0,180])
+            braille_letter(number);
+}
+braille_letter_bead(0);
+//for(i=[0:9])
+//    translate([(i*1.5)*cube_size,0,0])
+//        braille_bead(i);

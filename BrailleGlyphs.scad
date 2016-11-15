@@ -67,9 +67,11 @@ nums=[[_1,_2,_1,_2,_2,_1],[_2,_1,_1,_1,_1,_1],[_2,_2,_1,_1,_1,_1],[_2,_1,_1,_2,_
         [_2,_1,_1,_2,_2,_1],[_2,_1,_1,_1,_2,_1],[_2,_2,_1,_2,_1,_1],[_2,_2,_1,_2,_2,_1],
         [_2,_2,_1,_1,_2,_1],[_1,_2,_1,_2,_1,_1]];
 
+lets=[];
+
 alphabet=[a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z];
 
-numbers=[n1,n2,n3,n4,n5,n6,n7,n8,n9,n0];
+numbers=[n0,n1,n2,n3,n4,n5,n6,n7,n8,n9];
 
 module placeDot (placeX, placeY, dotSize, dotHeight) {
     translate([placeX,placeY,baseHeight]){
@@ -111,7 +113,11 @@ module Char_display_standard2(glyph1,glyph2){
     }
 }
 
-module braille_number(num){
+module braille_number(number){
     if(num<10)
         translate([-keySize/2,-keySize/2,0])
-            Char_display_standard2(numbersign,nums[num]);}
+            Char_display_standard2(numbersign,numbers[int(number)]);}
+
+module braille_letter(number){
+    translate([-keySize/2,-keySize/2,0])
+        Char_display_single(alphabet[number]);}
